@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.coverage
+htmlcov/
+
+# Virtual environments and secrets
+.venv/
+.env
+
+# Tooling caches
+.ruff_cache/
+.pytest_cache/
+.mypy_cache/
+
+# Local data and vector store (never committed)
+data/raw/
+data/processed/
+qdrant_storage/
