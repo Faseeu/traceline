@@ -30,4 +30,8 @@ Repository bootstrap is in progress. No retrieval features exist yet.
 
 ## Architecture
 
+See [docs/architecture.md](docs/architecture.md) for the layer rules, the target directory tree, and the decision records in [docs/adr/](docs/adr/).
+
 ## Usage
+
+_To be written once the first user-facing facade method exists._

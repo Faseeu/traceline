@@ -33,7 +33,19 @@ line-length = 100
 target-version = "py312"
 
 [tool.ruff.lint]
-select = ["E", "F", "I", "B", "UP"]
+select = ["E", "F", "I", "B", "UP", "TID"]
+
+# Layer rule: UI frameworks may only be imported from the interface layer.
+[tool.ruff.lint.flake8-tidy-imports.banned-api]
+"streamlit".msg = "UI frameworks are banned in the core library; import them only under interfaces/."
+"pyvis".msg = "UI frameworks are banned in the core library; import them only under interfaces/."
+
+[tool.ruff.lint.per-file-ignores]
+"interfaces/**" = ["TID251"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+addopts = "-m 'not integration'"
+markers = [
+    "integration: tests that call Groq or Qdrant (excluded by default; run with -m integration)",
+]
