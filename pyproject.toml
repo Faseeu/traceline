@@ -1,17 +1,51 @@
 [project]
 name = "traceline"
 version = "0.1.0"
-description = "Add your description here"
+description = "Two-layer retrieval library: text chunks and a knowledge graph linked by chunk_id."
 readme = "README.md"
 authors = [
     { name = "Faseeu", email = "faseuu92@gmail.com" }
 ]
 requires-python = ">=3.12"
-dependencies = []
-
-[project.scripts]
-traceline = "traceline:main"
+dependencies = [
+    "groq>=1.7.0",
+    "networkx>=3.6.1",
+    "pydantic>=2.14.4",
+    "python-dotenv>=1.2.4",
+    "qdrant-client>=1.20.0",
+    "rank-bm25>=0.2.2",
+]
 
 [build-system]
 requires = ["uv_build>=0.11.21,<0.12.0"]
 build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.7.0",
+    "pytest>=9.2.0",
+    "pytest-cov>=7.1.0",
+    "ruff>=0.17.6",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "TID"]
+
+# Layer rule: UI frameworks may only be imported from the interface layer.
+[tool.ruff.lint.flake8-tidy-imports.banned-api]
+"streamlit".msg = "UI frameworks are banned in the core library; import them only under interfaces/."
+"pyvis".msg = "UI frameworks are banned in the core library; import them only under interfaces/."
+
+[tool.ruff.lint.per-file-ignores]
+"interfaces/**" = ["TID251"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-m 'not integration'"
+markers = [
+    "integration: tests that call Groq or Qdrant (excluded by default; run with -m integration)",
+]
