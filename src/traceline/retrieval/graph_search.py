@@ -36,10 +36,10 @@ def find_path(
     best[source] = 0
     heap_item = (best[source], next(counter), source)
     hq.heappush(heap, heap_item)
-    print(heap, best, came_from)
+    # print(heap, best, came_from)
 
     while heap:
-        cost, _, node = hq.heappop()
+        cost, _, node = hq.heappop(heap)
         if cost > best[node]:
             continue
         nodes_expanded += 1
@@ -110,3 +110,4 @@ if __name__ == "__main__":
     )
 
     print(find_path(g, "Viktor", "Account99"))
+    print(find_path(g, "Viktor", "Viktor"))
