@@ -7,7 +7,9 @@ authors = [
     { name = "Faseeu", email = "faseuu92@gmail.com" }
 ]
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "networkx>=3.7",
+]
 
 [project.scripts]
 traceline = "traceline:main"
